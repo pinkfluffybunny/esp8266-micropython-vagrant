@@ -74,11 +74,7 @@ to the virtual machine it extends the path to includes these tools.  Do this by
 executing:
 
     echo "PATH=$(pwd)/xtensa-lx106-elf/bin:\$PATH" >> ~/.profile
-
-Finally exit and re-enter the VM to make this path change available by running:
-
-    exit
-    vagrant ssh
+    source ~/.profile
 
 ## MicroPython Compilation
 
@@ -86,7 +82,9 @@ After the ESP open SDK has been compiled and added to the path, execute the
 following commands to start compiling MicroPython (the compilation is quick and
 only takes a few minutes depending on the speed of your machine):
 
-    cd ~/micropython/esp8266
+    cd ~/micropython
+    git submodule update --init
+    make axtls
     make
 
 After the firmware compilation finishes the output will be the file ./build/firmware-combined.bin.
