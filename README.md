@@ -14,7 +14,7 @@ their excellent software available!
 
 You must have the following software installed:
 
-*  [VirtualBox](https://www.virtualbox.org/)
+*  Hyper-V (Windows 8 or newer)
 *  [Vagrant](https://www.vagrantup.com/)
 
 # Usage
