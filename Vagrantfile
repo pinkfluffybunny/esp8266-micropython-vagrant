@@ -12,11 +12,13 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ericmann/trusty64"
 
   # Provision script to install dependencies used by the esp-open-sdk and
   # micropython tools.  First install dependencies as root.
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    echo "Switching off IPv6..."
+    sudo /bin/sh -c 'echo "precedence ::ffff:0:0/96  100" >> /etc/gai.conf'
     echo "Installing esp-open-sdk and micropython dependencies..."
     sudo apt-get update
     sudo apt-get install -y build-essential git make unrar-free unzip \
@@ -31,9 +33,10 @@ Vagrant.configure(2) do |config|
   SHELL
 
   # Virtualbox VM configuration.
-  config.vm.provider "virtualbox" do |v|
+  config.vm.provider "hyperv" do |v|
     # Bump the memory allocated to the VM up to 1 gigabyte as the compilation of
     # the esp-open-sdk tools requires more memory to complete.
+    v.cpus = 2
     v.memory = 1024
   end
 
