@@ -84,6 +84,7 @@ only takes a few minutes depending on the speed of your machine):
 
     cd ~/micropython
     git submodule update --init
+    cd esp8266
     make axtls
     make
 
